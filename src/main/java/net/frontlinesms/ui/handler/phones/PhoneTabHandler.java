@@ -488,7 +488,7 @@ public class PhoneTabHandler extends BaseTabHandler implements FrontlineMessagin
 		if (service instanceof MmsEmailService && service.getStatus().equals(MmsEmailServiceStatus.READY)) {
 			Long lastChecked = ((MmsEmailService) service).getEmailAccount().getLastCheck();
 			if (lastChecked != null) {
-				statusString += " - " + InternationalisationUtils.getI18nString(I18N_EMAIL_LAST_CHECKED, InternationalisationUtils.getDatetimeFormat().format(new Date (lastChecked)));
+				statusString += " - " + InternationalisationUtils.getI18nString(I18N_EMAIL_LAST_CHECKED, InternationalisationUtils.getDatetimeFormat().print(new Date (lastChecked).getTime()));
 			}
 		}
 		

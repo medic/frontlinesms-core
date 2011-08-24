@@ -305,7 +305,7 @@ public class HomeTabHandler extends BaseTabHandler implements EventObserver {
 		ui.setIcon(cell, icon);
 		ui.add(row, cell);
 		ui.add(row, ui.createTableCell(newEvent.getDescription()));
-		ui.add(row, ui.createTableCell(InternationalisationUtils.getDatetimeFormat().format(newEvent.getTime())));
+		ui.add(row, ui.createTableCell(InternationalisationUtils.getDatetimeFormat().print(newEvent.getTime())));
 		return row;
 	}
 

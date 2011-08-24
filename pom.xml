@@ -67,7 +67,8 @@
 				<executions>
 					<execution>
 						<id>zipResources</id>
-						<!-- Make sure that the latest version of resources.zip is bundled inside the JAR -->
+						<!-- Make sure that the latest version of resources.zip is bundled inside the JAR
+-->
 						<phase>generate-resources</phase>
 						<goals>
 							<goal>run</goal>
@@ -118,7 +119,8 @@
 			<artifactId>jdom</artifactId>
 		</dependency>
 		<dependency>
-			<!-- Requires fix found at http://www.slingingsemicolons.com/blogs/dave/maven-and-log4j -->
+			<!-- Requires fix found at http://www.slingingsemicolons.com/blogs/dave/maven-and-log4j
+-->
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 		</dependency>
@@ -138,7 +140,8 @@
 			<version>3.3.1.GA</version>
 		</dependency>
 		<!-- this is required by hibernate for reflection.  cglib can be used as an alternative by setting
-			hibernate.bytecode.provider=cglib in hibernate.properties on the classpath -->
+			hibernate.bytecode.provider=cglib in hibernate.properties on the classpath
+-->
 		<dependency>
 			<groupId>javassist</groupId>
 			<artifactId>javassist</artifactId>
@@ -169,6 +172,11 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<version>1.2.127</version>
+		</dependency>
+			<dependency>
+    		<groupId>joda-time</groupId>
+    		<artifactId>joda-time</artifactId>
+    		<version>2.0</version>
 		</dependency>
 	</dependencies>
 </project>

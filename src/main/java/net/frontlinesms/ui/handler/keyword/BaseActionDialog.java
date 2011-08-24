@@ -168,7 +168,7 @@ public abstract class BaseActionDialog implements ThinletUiEventHandler {
 			KeywordAction action = getTargetObject(KeywordAction.class);
 			
 			// Set the start date textfield
-			ui.setText(find(COMPONENT_TF_START_DATE), InternationalisationUtils.getDateFormat().format(action.getStartDate()));
+			ui.setText(find(COMPONENT_TF_START_DATE), InternationalisationUtils.getDateFormat().print(action.getStartDate()));
 			
 			// Set the end date textfield
 			Object endDateTextfield = find(COMPONENT_TF_END_DATE);
@@ -177,7 +177,7 @@ public abstract class BaseActionDialog implements ThinletUiEventHandler {
 			if (endDate == DEFAULT_END_DATE) {
 				endDateAsString = InternationalisationUtils.getI18nString(COMMON_UNDEFINED);
 			} else {
-				endDateAsString = InternationalisationUtils.getDateFormat().format(endDate);
+				endDateAsString = InternationalisationUtils.getDateFormat().print(endDate);
 			}
 			ui.setText(endDateTextfield, endDateAsString);
 		}

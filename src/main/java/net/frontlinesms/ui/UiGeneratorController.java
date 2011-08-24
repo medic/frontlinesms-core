@@ -1193,9 +1193,9 @@ public class UiGeneratorController extends FrontlineUI implements EmailListener,
 		setIcon(cell, icon);
 		add(row, cell);
 		add(row, createTableCell(getActionDescription(action)));
-		add(row, createTableCell(InternationalisationUtils.getDateFormat().format(action.getStartDate())));
+		add(row, createTableCell(InternationalisationUtils.getDateFormat().print(action.getStartDate())));
 		if (action.getEndDate() != DEFAULT_END_DATE) {
-			add(row, createTableCell(InternationalisationUtils.getDateFormat().format(action.getEndDate())));
+			add(row, createTableCell(InternationalisationUtils.getDateFormat().print(action.getEndDate())));
 		} else {
 			add(row, createTableCell(InternationalisationUtils.getI18nString(COMMON_UNDEFINED)));
 		}

@@ -824,7 +824,7 @@ public class MessageHistoryTabHandler extends BaseTabHandler implements PagedCom
 		
 
 		ui.add(row, ui.createTableCell(InternationalisationUtils.getI18nString(message.getStatus())));
-		ui.add(row, ui.createTableCell(InternationalisationUtils.getDatetimeFormat().format(message.getDate())));
+		ui.add(row, ui.createTableCell(InternationalisationUtils.getDatetimeFormat().print(message.getDate())));
 		ui.add(row, ui.createTableCell(message.getSenderMsisdn()));
 		ui.add(row, ui.createTableCell(message.getRecipientMsisdn()));
 		

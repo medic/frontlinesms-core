@@ -196,7 +196,7 @@ public class StatisticsManager {
 		if(dateLastSubmit == null || dateLastSubmit == 0) {
 			formattedDate = "";
 		} else {
-			formattedDate = InternationalisationUtils.getDateFormat().format(dateLastSubmit);
+			formattedDate = InternationalisationUtils.getDateFormat().print(dateLastSubmit);
 		}
 		this.statisticsList.put(I18N_KEY_STATS_LAST_SUBMISSION_DATE, formattedDate);
 	}

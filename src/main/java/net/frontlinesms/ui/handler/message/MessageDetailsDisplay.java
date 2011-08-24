@@ -54,7 +54,7 @@ public class MessageDetailsDisplay implements ThinletUiEventHandler {
 		setText(UI_COMPONENT_TF_STATUS, InternationalisationUtils.getI18nString(message.getStatus()));
 		setText(UI_COMPONENT_TF_SENDER, ui.getSenderDisplayValue(message));
 		setText(UI_COMPONENT_TF_RECIPIENT, ui.getRecipientDisplayValue(message));
-		setText(UI_COMPONENT_TF_DATE, InternationalisationUtils.getDatetimeFormat().format(message.getDate()));
+		setText(UI_COMPONENT_TF_DATE, InternationalisationUtils.getDatetimeFormat().print(message.getDate()));
 		
 		if (message instanceof FrontlineMultimediaMessage && ((FrontlineMultimediaMessage) message).getSubject().length() > 0) {
 			setText(UI_COMPONENT_TF_SUBJECT, ((FrontlineMultimediaMessage) message).getSubject());

@@ -268,7 +268,7 @@ public class EmailTabHandler extends BaseTabHandler implements PagedComponentIte
 		if (email.getDate() == DEFAULT_END_DATE) {
 			ui.add(row, ui.createTableCell(""));
 		} else {
-			ui.add(row, ui.createTableCell(InternationalisationUtils.getDatetimeFormat().format(email.getDate())));
+			ui.add(row, ui.createTableCell(InternationalisationUtils.getDatetimeFormat().print(email.getDate())));
 		}
 		ui.add(row, ui.createTableCell(email.getEmailFrom().getAccountName()));
 		ui.add(row, ui.createTableCell(email.getEmailRecipients()));
