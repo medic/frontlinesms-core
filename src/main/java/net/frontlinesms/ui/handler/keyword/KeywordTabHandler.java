@@ -298,7 +298,7 @@ public class KeywordTabHandler extends BaseTabHandler implements PagedComponentI
 		long startDate;
 		try {
 			startDate = InternationalisationUtils.parseDate(InternationalisationUtils.getDefaultStartDate()).getTime();
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			log.debug("We never should get this", e);
 			log.trace("EXIT");
 			return;

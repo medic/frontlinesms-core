@@ -498,7 +498,7 @@ public class MessageHistoryTabHandler extends BaseTabHandler implements PagedCom
 		String tfEndDateValue = ui.getText(find(COMPONENT_TF_END_DATE));
 		try {
 			newStart = InternationalisationUtils.parseDate(tfStartDateValue).getTime();
-		} catch (ParseException ex) {}
+		} catch (Exception ex) {}
 		Long newEnd = null;
 		try {
 			Date parsedDate = InternationalisationUtils.parseDate(tfEndDateValue);
@@ -510,7 +510,7 @@ public class MessageHistoryTabHandler extends BaseTabHandler implements PagedCom
 				// Otherwise, messages received until the end of the whole day should be displayed 
 				newEnd = FrontlineUtils.getFirstMillisecondOfNextDay(parsedDate);
 			}
-		} catch (ParseException ex) {}
+		} catch (Exception ex) {}
 		
 		// We refresh the list once if one of the date fields changed to either a valid or an empty date 
 		if ((newStart != null && !newStart.equals(messageHistoryStart)) || (tfStartDateValue.equals("") && messageHistoryStart != null)) {
