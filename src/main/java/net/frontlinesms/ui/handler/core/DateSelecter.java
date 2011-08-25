@@ -39,10 +39,6 @@ import thinlet.Thinlet;
 public class DateSelecter {
 	
 //> STATIC CONSTANTS
-	/** Index of the first month, January */
-	private static final int FIRST_MONTH = 0;
-	/** Index of the last month, December */
-	private static final int LAST_MONTH = 12;
 	private static final String COMPONENT_LB_MONTH = "lbMonth";
 	private static final String COMPONENT_BT_NEXT = "btNext";
 	private static final String COMPONENT_BT_PREVIOUS = "btPrevious";
@@ -65,7 +61,7 @@ public class DateSelecter {
 	private int monthToHighlight;
 	private int yearToHighlight;
 	
-	private final static String[] ethiopicMonths = new String[]{
+	private final static String[] ETHIOPIC_MONTHS = new String[]{
 		"M\u00E4sk\u00E4r\u00E4m","\u1E6C\u0259q\u0259mt", "\u1E2A\u0259dar",
 		"Ta\u1E2B\u015Ba\u015B", "\u1E6C\u0259rr","Y\u00E4katit",
 		"M\u00E4gabit","Miyazya","G\u0259nbot","S\u00E4ne",
@@ -162,7 +158,7 @@ public class DateSelecter {
 	private void showMonth(Object dialog) {
 		log.trace("ENTER");
 		current = new DateTime(current.getYear(),current.getMonthOfYear(),1,2,2,InternationalisationUtils.ethiopicChronology);
-		String curMonth = ethiopicMonths[current.getMonthOfYear() -1] + " " + curYear;
+		String curMonth = ETHIOPIC_MONTHS[current.getMonthOfYear() -1] + " " + curYear;
 		Object lbMonth = ui.find(dialog, COMPONENT_LB_MONTH);
 		log.debug("Current month [" + curMonth + "]");
 		ui.setText(lbMonth, curMonth);
