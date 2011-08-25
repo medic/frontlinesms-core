@@ -6,10 +6,6 @@ import static net.frontlinesms.FrontlineSMSConstants.MESSAGE_WRONG_FORMAT_DATE;
 import static net.frontlinesms.ui.UiGeneratorControllerConstants.COMPONENT_BT_SAVE;
 import static net.frontlinesms.ui.UiGeneratorControllerConstants.COMPONENT_TF_END_DATE;
 import static net.frontlinesms.ui.UiGeneratorControllerConstants.COMPONENT_TF_START_DATE;
-
-import java.text.ParseException;
-import org.apache.log4j.Logger;
-
 import net.frontlinesms.FrontlineUtils;
 import net.frontlinesms.data.domain.Keyword;
 import net.frontlinesms.data.domain.KeywordAction;
@@ -18,6 +14,8 @@ import net.frontlinesms.messaging.MessageFormatter;
 import net.frontlinesms.ui.ThinletUiEventHandler;
 import net.frontlinesms.ui.UiGeneratorController;
 import net.frontlinesms.ui.i18n.InternationalisationUtils;
+
+import org.apache.log4j.Logger;
 
 /**
  * Base class containing shared attributes and behaviour of {@link KeywordAction} edit dialogs. 
@@ -187,7 +185,7 @@ public abstract class BaseActionDialog implements ThinletUiEventHandler {
 		String startDate = ui.getText(find(COMPONENT_TF_START_DATE));
 		try {
 			return FrontlineUtils.getLongDateFromStringDate(startDate, true);
-		} catch (ParseException ex) {
+		} catch (Exception ex) {
 			throw new DialogValidationException("Wrong format for date", ex, InternationalisationUtils.getI18nString(MESSAGE_WRONG_FORMAT_DATE));
 		}
 	}
@@ -198,7 +196,7 @@ public abstract class BaseActionDialog implements ThinletUiEventHandler {
 		
 		try {
 			return FrontlineUtils.getLongDateFromStringDate(endDate, false);
-		} catch (ParseException ex) {
+		} catch (Exception ex) {
 			throw new DialogValidationException("Wrong format for date", ex, InternationalisationUtils.getI18nString(MESSAGE_WRONG_FORMAT_DATE));
 		}
 	}

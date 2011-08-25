@@ -23,30 +23,22 @@ import static net.frontlinesms.ui.UiGeneratorControllerConstants.COMPONENT_TF_EN
 import static net.frontlinesms.ui.UiGeneratorControllerConstants.COMPONENT_TF_START_DATE;
 import static net.frontlinesms.ui.UiGeneratorControllerConstants.TAB_MESSAGE_HISTORY;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
-
-import org.apache.log4j.Logger;
-
-import thinlet.Thinlet;
-import thinlet.ThinletText;
 
 import net.frontlinesms.AppProperties;
 import net.frontlinesms.FrontlineSMSConstants;
 import net.frontlinesms.FrontlineUtils;
 import net.frontlinesms.data.Order;
 import net.frontlinesms.data.domain.Contact;
+import net.frontlinesms.data.domain.FrontlineMessage;
 import net.frontlinesms.data.domain.FrontlineMultimediaMessage;
 import net.frontlinesms.data.domain.Group;
 import net.frontlinesms.data.domain.Keyword;
-import net.frontlinesms.data.domain.FrontlineMessage;
 import net.frontlinesms.data.domain.FrontlineMessage.Field;
 import net.frontlinesms.data.domain.FrontlineMessage.Status;
 import net.frontlinesms.data.domain.FrontlineMessage.Type;
@@ -71,6 +63,11 @@ import net.frontlinesms.ui.handler.PagedListDetails;
 import net.frontlinesms.ui.handler.contacts.GroupSelecterPanel;
 import net.frontlinesms.ui.handler.contacts.SingleGroupSelecterPanelOwner;
 import net.frontlinesms.ui.i18n.InternationalisationUtils;
+
+import org.apache.log4j.Logger;
+
+import thinlet.Thinlet;
+import thinlet.ThinletText;
 
 /**
  * Handler for the MessageHistory tab.

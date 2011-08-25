@@ -469,9 +469,8 @@ public class InternationalisationUtils {
 	 * @param date
 	 *            A date {@link String} formatted with {@link #getDateFormat()}
 	 * @return a java {@link Date} object describing the supplied date
-	 * @throws ParseException
 	 */
-	public static Date parseDate(String date) throws ParseException {
+	public static Date parseDate(String date) {
 		return new Date(getDateFormat().parseMillis(date));
 	}
 
