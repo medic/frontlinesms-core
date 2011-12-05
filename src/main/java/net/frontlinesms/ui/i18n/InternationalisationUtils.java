@@ -97,8 +97,8 @@ public class InternationalisationUtils {
 	static{
 		addisZone = DateTimeZone.forID("Africa/Addis_Ababa");
 		ethiopicChronology = EthiopicChronology.getInstance(addisZone);
-		dateFormatter = DateTimeFormat.shortDate().withChronology(ethiopicChronology).withZone(addisZone);
-		dateTimeFormatter = DateTimeFormat.shortDateTime().withChronology(ethiopicChronology).withZone(addisZone);
+		dateFormatter = DateTimeFormat.forPattern("dd/MM/yyyy").withChronology(ethiopicChronology).withZone(addisZone);
+		dateTimeFormatter = DateTimeFormat.forPattern("dd/MM/yyyy hh:mm").withChronology(ethiopicChronology).withZone(addisZone);
 	}
 	
 	public static String getI18nString(Internationalised i) {

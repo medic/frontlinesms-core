@@ -25,8 +25,8 @@ public class FrontlineUtilsTest extends BaseTestCase {
 		
 		date = FrontlineUtils.getLongDateFromStringDate("", true);
 		assertTrue(System.currentTimeMillis() >= date);
-		assertTrue(FrontlineUtils.getLongDateFromStringDate("20/04/2009", true) < FrontlineUtils.getLongDateFromStringDate("19/04/2010", true));
-		assertTrue(FrontlineUtils.getLongDateFromStringDate("20/04/09", true) < FrontlineUtils.getLongDateFromStringDate("19/04/10", true));
+		assertTrue(FrontlineUtils.getLongDateFromStringDate("04/20/2009", true) < FrontlineUtils.getLongDateFromStringDate("04/19/2010", true));
+		assertTrue(FrontlineUtils.getLongDateFromStringDate("04/20/09", true) < FrontlineUtils.getLongDateFromStringDate("04/19/10", true));
 	}
 	
 	public void testGetFilenameWithoutFinalExtension() {
