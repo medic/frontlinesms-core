@@ -34,6 +34,7 @@ import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Currency;
@@ -55,10 +56,6 @@ import net.frontlinesms.ui.FrontlineUI;
 import net.frontlinesms.ui.UiProperties;
 
 import org.apache.log4j.Logger;
-import org.joda.time.DateTimeZone;
-import org.joda.time.chrono.EthiopicChronology;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
 import thinlet.Thinlet;
 
@@ -88,18 +85,6 @@ public class InternationalisationUtils {
 //> GENERAL i18n HELP METHODS
 	/** The default characterset, UTF-8. This must be available for every JVM. */
 	public static final Charset CHARSET_UTF8 = Charset.forName("UTF-8");
-
-	public static final DateTimeZone addisZone;
-	public static final EthiopicChronology ethiopicChronology;
-	public static final DateTimeFormatter dateFormatter;
-	public static final DateTimeFormatter dateTimeFormatter;
-	
-	static{
-		addisZone = DateTimeZone.forID("Africa/Addis_Ababa");
-		ethiopicChronology = EthiopicChronology.getInstance(addisZone);
-		dateFormatter = DateTimeFormat.forPattern("dd/MM/yyyy").withChronology(ethiopicChronology).withZone(addisZone);
-		dateTimeFormatter = DateTimeFormat.forPattern("dd/MM/yyyy hh:mm").withChronology(ethiopicChronology).withZone(addisZone);
-	}
 	
 	public static String getI18nString(Internationalised i) {
 		return getI18nString(i.getI18nKey());
@@ -437,8 +422,8 @@ public class InternationalisationUtils {
 	 * @return date format for displaying and entering year (4 digits), month
 	 *         and day.
 	 */
-	public static DateTimeFormatter getDateFormat() {
-		return dateFormatter;
+	public static DateFormat getDateFormat() {
+		return new SimpleDateFormat(getI18nString(FrontlineSMSConstants.DATEFORMAT_YMD));
 	}
 
 	/**
@@ -446,8 +431,8 @@ public class InternationalisationUtils {
 	 * 
 	 * @return date format for displaying date and time.#
 	 */
-	public static DateTimeFormatter getDatetimeFormat() {
-		return dateTimeFormatter;
+	public static DateFormat getDatetimeFormat() {
+		return new SimpleDateFormat(getI18nString(FrontlineSMSConstants.DATEFORMAT_YMD_HMS));
 	}
 
 	/**
@@ -458,7 +443,7 @@ public class InternationalisationUtils {
 	 * @return current time as a formatted date string
 	 */
 	public static String getDefaultStartDate() {
-		return getDateFormat().print(new Date().getTime());
+		return getDateFormat().format(new Date());
 	}
 
 	/**
@@ -469,11 +454,12 @@ public class InternationalisationUtils {
 	 * @param date
 	 *            A date {@link String} formatted with {@link #getDateFormat()}
 	 * @return a java {@link Date} object describing the supplied date
+	 * @throws ParseException
 	 */
-	public static Date parseDate(String date) {
-		return new Date(getDateFormat().parseMillis(date));
+	public static Date parseDate(String date) throws ParseException {
+		return getDateFormat().parse(date);
 	}
-
+	
 	/**
 	 * <p>
 	 * Merges the source map into the destination. Values in the destination
