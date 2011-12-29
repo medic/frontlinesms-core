@@ -34,7 +34,6 @@ import net.frontlinesms.messaging.sms.SmsService;
 
 import org.apache.log4j.Logger;
 import org.smslib.*;
-import org.smslib.CService.MessageClass;
 
 /**
  * Class for handling the serial connection to an individual SMS device.
@@ -738,7 +737,7 @@ public class SmsModem extends Thread implements SmsService {
 		LOG.trace("ENTER");
 		resetWatchdog();
 		LinkedList<CIncomingMessage> messageList = new LinkedList<CIncomingMessage>();
-		cService.readMessages(messageList, MessageClass.UNREAD); // TODO make this changeable in settings - UNREAD vs ALL
+		cService.readMessages(messageList, org.smslib.service.MessageClass.UNREAD); // TODO make this changeable in settings - UNREAD vs ALL
 		resetWatchdog();
 
 		LOG.debug("[" + messageList.size() + "] message(s) received.");

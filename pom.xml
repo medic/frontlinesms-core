@@ -8,9 +8,9 @@
 		<groupId>net.frontlinesms.core</groupId>
 		<artifactId>frontlinesms-pom-parent</artifactId>
 		<version>1.7.00-beta-5</version>
-		<relativePath>../pom-parent</relativePath>
+		<relativePath>../frontlinesms-pom-parent/pom.xml</relativePath>
 	</parent>
-	<version>1.7.00-beta-6-wbethiopia</version>
+	<version>1.7.00-beta-6-hope</version>
 	
 	<scm>
 		<connection>scm:git://github.com/frontlinesms/frontlinesms-core.git</connection>
@@ -182,13 +182,6 @@
 			<groupId>net.frontlinesms.core</groupId>
 			<artifactId>frontlinesms-test</artifactId>
 			<version>0.01.01</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>2.5.6</version>
-			<type>jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
