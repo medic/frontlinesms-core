@@ -34,6 +34,7 @@ import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Currency;
@@ -55,10 +56,6 @@ import net.frontlinesms.ui.FrontlineUI;
 import net.frontlinesms.ui.UiProperties;
 
 import org.apache.log4j.Logger;
-import org.joda.time.DateTimeZone;
-import org.joda.time.chrono.EthiopicChronology;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
 import thinlet.Thinlet;
 
@@ -66,7 +63,7 @@ import thinlet.Thinlet;
  * Utilities for helping internationalise text etc.
  * 
  * @author Alex Anderson
- * @author GonÃ§alo Silva
+ * @author Gonalo Silva
  */
 public class InternationalisationUtils {
 
@@ -89,22 +86,11 @@ public class InternationalisationUtils {
 	/** The default characterset, UTF-8. This must be available for every JVM. */
 	public static final Charset CHARSET_UTF8 = Charset.forName("UTF-8");
 
-	public static final DateTimeZone addisZone;
-	public static final EthiopicChronology ethiopicChronology;
-	public static final DateTimeFormatter dateFormatter;
-	public static final DateTimeFormatter dateTimeFormatter;
-	
-	static{
-		addisZone = DateTimeZone.forID("Africa/Addis_Ababa");
-		ethiopicChronology = EthiopicChronology.getInstance(addisZone);
-		dateFormatter = DateTimeFormat.forPattern("dd/MM/yyyy").withChronology(ethiopicChronology).withZone(addisZone);
-		dateTimeFormatter = DateTimeFormat.forPattern("dd/MM/yyyy hh:mm").withChronology(ethiopicChronology).withZone(addisZone);
-	}
-	
+//>
 	public static String getI18nString(Internationalised i) {
 		return getI18nString(i.getI18nKey());
 	}
-	
+
 	/**
 	 * Return an internationalised message for this key, with the current resource bundle
 	 * This method tries to get the string for the current bundle and if it does
@@ -123,7 +109,7 @@ public class InternationalisationUtils {
 		}
 		return Thinlet.DEFAULT_ENGLISH_BUNDLE.get(key);
 	}
-	
+
 	/**
 	 * Return an internationalised message for this key and the given resource bundle. 
 	 * <br> This method tries to get the string for the bundle given in parameter and looks into
@@ -162,7 +148,7 @@ public class InternationalisationUtils {
 					for (String value : values) {
 						formattedValues.add(formatString(value, i18nValues));
 					}
-					
+
 					return formattedValues;
 				}
 			} catch(MissingResourceException ex) {}
@@ -229,7 +215,7 @@ public class InternationalisationUtils {
 		return getI18nString(key, Integer.toString(intValue));
 	}
 
-	
+
 	/**
 	 * Parses a string representation of an amount of currency to an integer.
 	 * This will handle cases where the string has separators, including non
@@ -244,13 +230,13 @@ public class InternationalisationUtils {
 		String regexPattern = "\\D";
 		Pattern pattern = Pattern.compile(regexPattern);
 		Matcher matcher = pattern.matcher(currencyString);
-		
+
 
 		//Execute if currencyString has the specified pattern
 		if (matcher.find()) {
-			
+
 			String[] splitValues = currencyString.split(regexPattern);
-			
+
 			if (splitValues.length == 0) {
 				throw new NumberFormatException();
 			} else if (splitValues.length == 1) {
@@ -260,11 +246,11 @@ public class InternationalisationUtils {
 				currencyString = splitValues[0] + "." + splitValues[1];
 			} else {
 				int splitValuesLastBlock = splitValues.length - 1;
-				
+
 				String[] separators = new String[splitValuesLastBlock];
 
 				matcher.reset();
-				
+
 				// Find all separators and store them
 				for(int counter = 0; !matcher.hitEnd(); counter++){
 					if(matcher.find()){
@@ -301,8 +287,8 @@ public class InternationalisationUtils {
 		} else {
 			return NumberFormat.getCurrencyInstance(getCurrentLocale()).format(value);
 		}
-		
-		
+
+
 	}
 
 	// > LANGUAGE BUNDLE LOADING METHODS
@@ -437,8 +423,9 @@ public class InternationalisationUtils {
 	 * @return date format for displaying and entering year (4 digits), month
 	 *         and day.
 	 */
-	public static DateTimeFormatter getDateFormat() {
-		return dateFormatter;
+	public static DateFormat getDateFormat() {
+		return new SimpleDateFormat(
+				getI18nString(FrontlineSMSConstants.DATEFORMAT_YMD));
 	}
 
 	/**
@@ -446,8 +433,9 @@ public class InternationalisationUtils {
 	 * 
 	 * @return date format for displaying date and time.#
 	 */
-	public static DateTimeFormatter getDatetimeFormat() {
-		return dateTimeFormatter;
+	public static DateFormat getDatetimeFormat() {
+		return new SimpleDateFormat(
+				getI18nString(FrontlineSMSConstants.DATEFORMAT_YMD_HMS));
 	}
 
 	/**
@@ -458,7 +446,7 @@ public class InternationalisationUtils {
 	 * @return current time as a formatted date string
 	 */
 	public static String getDefaultStartDate() {
-		return getDateFormat().print(new Date().getTime());
+		return getDateFormat().format(new Date());
 	}
 
 	/**
@@ -469,9 +457,10 @@ public class InternationalisationUtils {
 	 * @param date
 	 *            A date {@link String} formatted with {@link #getDateFormat()}
 	 * @return a java {@link Date} object describing the supplied date
+	 * @throws ParseException
 	 */
-	public static Date parseDate(String date) {
-		return new Date(getDateFormat().parseMillis(date));
+	public static Date parseDate(String date) throws ParseException {
+		return getDateFormat().parse(date);
 	}
 
 	/**
@@ -539,7 +528,7 @@ public class InternationalisationUtils {
 				.getLocale()
 				: new Locale("en", "gb");
 	}
-	
+
 	public static String getInternationalPhoneNumber(String phoneNumber) {
 		return CountryCallingCode.format(phoneNumber, AppProperties.getInstance().getUserCountry());
 	}

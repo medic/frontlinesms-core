@@ -250,19 +250,13 @@ public class FrontlineSMS implements SmsSender, SmsListener, EmailListener, Even
 		mmsServiceManager.setEventBus(getEventBus());
 		mmsServiceManager.setEmailAccountDao(this.emailAccountDao);
 		mmsServiceManager.start();
-		System.out.println("before init email service");
 		initSmsInternetServices();
-		System.out.println("before init mms service");
 		initMmsEmailServices();
-		
-		System.out.println("before init plugin controllers");
 		this.pluginManager.initPluginControllers();
 
-		System.out.println("before start email service");
 		LOG.debug("Starting E-mail Manager...");
 		emailServerManager.start();
-		
-		System.out.println("before reloading messages to outbox");
+	
 		LOG.debug("Re-Loading messages to outbox.");
 		//We need to reload all messages, which status is OUTBOX, to the outbox.
 		for (FrontlineMessage m : messageDao.getMessages(Type.OUTBOUND, Status.OUTBOX, Status.PENDING)) {
